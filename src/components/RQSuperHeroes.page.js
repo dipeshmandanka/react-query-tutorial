@@ -6,10 +6,14 @@ const fetchSuperHeroes = () => {
   return axios.get("http://localhost:4000/superheroes")
 }
 export default function RQSuperHeroesPage() {
-  const {data, isLoading} = useQuery("super-heroes", fetchSuperHeroes);
+  const {data, isLoading, isError, error} = useQuery("super-heroes", fetchSuperHeroes);
   
   if (isLoading) {
     return <h2>Loading...</h2>
+  }
+
+  if (isError) {
+    return <h2>{error.message}</h2>
   }
   
   return (
