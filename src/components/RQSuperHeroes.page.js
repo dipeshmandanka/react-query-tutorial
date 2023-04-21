@@ -6,12 +6,10 @@ const fetchSuperHeroes = () => {
     return axios.get('http://localhost:4000/superheroes');
 };
 export default function RQSuperHeroesPage() {
-    const [refetch, setRefetch] = useState(3000);
+    
 
     function onSuccess(data) {
-      if(data?.data.length >= 4) {
-        setRefetch(false);
-      }
+      console.log("Data fetching success", data);
     }
 
     function onError(error) {
@@ -22,9 +20,14 @@ export default function RQSuperHeroesPage() {
         'super-heroes',
         fetchSuperHeroes,
         {
-            refetchInterval: refetch,
             onSuccess: onSuccess,
             onError: onError,
+            select: (data) => {
+              const heroNames = data.data.map(hero => {
+                return {id: hero.id, name: hero.name}
+              });
+              return heroNames;
+            }
         }
     );
 
@@ -42,9 +45,12 @@ export default function RQSuperHeroesPage() {
         <div>
             <h2>RQ SuperHeroes</h2>
             
-            {data?.data.map(hero => (
+            {/* {data?.data.map(hero => (
                 <div key={hero.id}>{hero.name}</div>
-            ))}
+            ))} */}
+           {data.map(hero => {
+            return <div key={hero.id}>{hero.name}</div>
+           })}
         </div>
     );
 }
