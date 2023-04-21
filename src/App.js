@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import HomePage from './components/Home.page';
 import SuperHeroesPage from './components/SuperHeroes.page';
 import RQSuperHeroesPage from './components/RQSuperHeroes.page';
+import RQSuperHeroPage from './components/RQSuperHero.page';
 
 const queryClient = new QueryClient()
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path='/' element={<HomePage />}></Route>
           <Route path='/super-heroes' element={<SuperHeroesPage />}></Route>
           <Route path='/rq-super-heroes' element={<RQSuperHeroesPage />}></Route>
+          <Route path='/rq-super-heroes/:heroId' element={<RQSuperHeroPage />}></Route>
         </Routes>
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} position='bottom-right'/>

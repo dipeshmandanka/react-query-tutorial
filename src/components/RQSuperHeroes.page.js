@@ -1,21 +1,18 @@
-import axios from 'axios';
-import React, { useState } from 'react';
-import { useQuery } from 'react-query';
+import React from 'react';
 import useSuperHerosData from '../hooks/useSuperHerosData';
 import useDisplaySuperHeroes from '../hooks/useDisplaySuperHeroes';
 
-
 export default function RQSuperHeroesPage() {
-  
     function onSuccess(data) {
-      console.log("Data fetching success", data);
+        console.log('Data fetching success', data);
     }
 
     function onError(error) {
-      console.log("Data fetching failed", error)
+        console.log('Data fetching failed', error);
     }
 
-    const { data, isLoading, isError, error, isFetching, refetch} = useSuperHerosData(onSuccess, onError);
+    const { data, isLoading, isError, error, isFetching, refetch } =
+        useSuperHerosData(onSuccess, onError);
     const superHeroes = useDisplaySuperHeroes(data);
     
     console.log({ isFetching, isLoading });
@@ -32,7 +29,7 @@ export default function RQSuperHeroesPage() {
         <div>
             <h2>RQ SuperHeroes</h2>
             <button onClick={refetch}>Display SuperHeroes</button>
-           {superHeroes}
+            {superHeroes}
         </div>
     );
 }
